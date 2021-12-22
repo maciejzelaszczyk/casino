@@ -28,6 +28,11 @@ version = '4.0.0-dev'
 [dependencies]
 jsonrpc-core = '18.0.0'
 structopt = '0.3.8'
+futures = "0.3.19"
+async-trait = "0.1.50"
+log = "0.4.14"
+chrono = "0.4.19"
+
 
 [dependencies.frame-benchmarking]
 git = 'https://github.com/paritytech/substrate.git'
@@ -167,6 +172,40 @@ git = 'https://github.com/paritytech/substrate.git'
 tag = 'monthly-2021-12'
 version = '4.0.0-dev'
 
+[dependencies.sp-inherents]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+tag = 'monthly-2021-12'
+version = '4.0.0-dev'
+
+[dependencies.sc-utils]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+tag = 'monthly-2021-12'
+version = '4.0.0-dev'
+
+[dependencies.sc-network-gossip]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+tag = 'monthly-2021-12'
+version = '0.10.0-dev'
+
+[dependencies.sc-network]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+tag = 'monthly-2021-12'
+version = '0.10.0-dev'
+
+[dependencies.prometheus-endpoint]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+tag = 'monthly-2021-12'
+version = '0.10.0-dev'
+package = 'substrate-prometheus-endpoint'
+
 [features]
 default = []
+std = [
+    'sp-inherents/std',
+]
 runtime-benchmarks = ['node-template-runtime/runtime-benchmarks']

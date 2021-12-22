@@ -11,6 +11,8 @@ use sc_telemetry::{Telemetry, TelemetryWorker};
 use sp_consensus::SlotData;
 use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
 use std::{sync::Arc, time::Duration};
+use sc_utils::mpsc::TracingUnboundedReceiver;
+use crate::casino;
 
 // Our native executor instance.
 pub struct ExecutorDispatch;
@@ -47,14 +49,17 @@ pub fn new_partial(
 		sc_consensus::DefaultImportQueue<Block, FullClient>,
 		sc_transaction_pool::FullPool<Block, FullClient>,
 		(
-			sc_finality_grandpa::GrandpaBlockImport<
-				FullBackend,
-				Block,
-				FullClient,
-				FullSelectChain,
+			casino::CasinoBlockImporter<Block, FullClient,
+				sc_finality_grandpa::GrandpaBlockImport<
+					FullBackend,
+					Block,
+					FullClient,
+					FullSelectChain,
+				>
 			>,
 			sc_finality_grandpa::LinkHalf<Block, FullClient, FullSelectChain>,
 			Option<Telemetry>,
+			TracingUnboundedReceiver<sp_timestamp::Timestamp>,
 		),
 	>,
 	ServiceError,
@@ -110,11 +115,16 @@ pub fn new_partial(
 		telemetry.as_ref().map(|x| x.handle()),
 	)?;
 
+	let (tx, rx) = sc_utils::mpsc::tracing_unbounded("casino-timestamp-channel");
+	let casino_block_importer = casino::CasinoBlockImporter::<Block, _, _>::new(grandpa_block_import.clone(), 1, 5, tx);
+
 	let slot_duration = sc_consensus_aura::slot_duration(&*client)?.slot_duration();
 
 	let import_queue =
 		sc_consensus_aura::import_queue::<AuraPair, _, _, _, _, _, _>(ImportQueueParams {
-			block_import: grandpa_block_import.clone(),
+			block_import: casino_block_importer.clone(),
+			// a bit of crude but it works that we don't pass casino_block_importer here
+			// in order to pass it we'd need to implement another trait
 			justification_import: Some(Box::new(grandpa_block_import.clone())),
 			client: client.clone(),
 			create_inherent_data_providers: move |_, ()| async move {
@@ -145,7 +155,7 @@ pub fn new_partial(
 		keystore_container,
 		select_chain,
 		transaction_pool,
-		other: (grandpa_block_import, grandpa_link, telemetry),
+		other: (casino_block_importer, grandpa_link, telemetry, rx),
 	})
 }
 
@@ -166,7 +176,7 @@ pub fn new_full(mut config: Configuration) -> Result<TaskManager, ServiceError> 
 		mut keystore_container,
 		select_chain,
 		transaction_pool,
-		other: (block_import, grandpa_link, mut telemetry),
+		other: (block_import, grandpa_link, mut telemetry, timestamp_rx),
 	} = new_partial(&config)?;
 
 	if let Some(url) = &config.keystore_remote {
@@ -317,7 +327,7 @@ pub fn new_full(mut config: Configuration) -> Result<TaskManager, ServiceError> 
 		let grandpa_config = sc_finality_grandpa::GrandpaParams {
 			config: grandpa_config,
 			link: grandpa_link,
-			network,
+			network: network.clone(),
 			voting_rule: sc_finality_grandpa::VotingRulesBuilder::default().build(),
 			prometheus_registry,
 			shared_voter_state: SharedVoterState::empty(),
@@ -330,6 +340,12 @@ pub fn new_full(mut config: Configuration) -> Result<TaskManager, ServiceError> 
 			"grandpa-voter",
 			None,
 			sc_finality_grandpa::run_grandpa_voter(grandpa_config)?,
+		);
+
+		task_manager.spawn_handle().spawn(
+			"casino",
+			None,
+			casino::run_casino_gossiper(timestamp_rx, network)?
 		);
 	}
 
