@@ -1,0 +1,79 @@
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: Substrate Node    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: ✌️  version 4.0.0-dev-8d1a5ae-x86_64-linux-gnu    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: ❤️  by Substrate DevHub <https://github.com/substrate-developer-hub>, 2017-2021    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: 📋 Chain specification: Local Testnet    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: 🏷 Node name: Alice    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: 👤 Role: AUTHORITY    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: 💾 Database: RocksDb at /tmp/alice/chains/local_testnet/db/full    
+2021-12-29 14:05:56.372  INFO main sc_cli::runner: ⛓  Native runtime: node-template-100 (node-template-1.tx1.au1)    
+2021-12-29 14:05:56.448  INFO main sc_service::client::client: 🔨 Initializing Genesis block/state (state: 0x20b8…7584, header-hash: 0x9b46…da08)    
+2021-12-29 14:05:56.449  INFO main afg: 👴 Loading GRANDPA authority set from genesis on what appears to be first startup.    
+2021-12-29 14:05:56.645  INFO main sc_consensus_slots: ⏱  Loaded block-time = 6s from block 0x9b4668f2275bff312b86b38b74a995b32f323a6b83934843b284f4a5b8e1da08    
+2021-12-29 14:05:56.645  WARN main sc_service::config: Using default protocol ID "sup" because none is configured in the chain specs    
+2021-12-29 14:05:56.646  INFO main sub-libp2p: 🏷 Local node identity is: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp    
+2021-12-29 14:05:56.650  INFO main sc_service::builder: 📦 Highest known block at #0    
+2021-12-29 14:05:56.650  INFO tokio-runtime-worker substrate_prometheus_endpoint: 〽️ Prometheus exporter started at 127.0.0.1:9615    
+2021-12-29 14:05:56.652  INFO                 main parity_ws: Listening for new connections on 127.0.0.1:9945.    
+2021-12-29 14:05:58.980 ERROR tokio-runtime-worker sub-libp2p: add_set_reserved_peer with unknown protocol: casino/1    
+2021-12-29 14:06:00.003  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🙌 Starting consensus session on top of parent 0x9b4668f2275bff312b86b38b74a995b32f323a6b83934843b284f4a5b8e1da08    
+2021-12-29 14:06:00.010  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🎁 Prepared block for proposing at 1 (1 ms) [hash: 0x417e2c373577ee5618f01751cb133101b05c501d175cab54f759a6ee9c3e6ae0; parent_hash: 0x9b46…da08; extrinsics (1): [0xa437…12a9]]    
+2021-12-29 14:06:00.012  INFO tokio-runtime-worker aura: 🔖 Pre-sealed block for proposal at 1. Hash now 0x55e8cee8b77fbceea2a41c98f61cf9bfa20ce9d859f38c3224793226b133e26c, previously 0x417e2c373577ee5618f01751cb133101b05c501d175cab54f759a6ee9c3e6ae0.    
+2021-12-29 14:06:00.012  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:00.160 and block number 1 from block importer.    
+2021-12-29 14:06:00.012  INFO tokio-runtime-worker substrate: ✨ Imported #1 (0x55e8…e26c)    
+2021-12-29 14:06:01.652  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #1 (0x55e8…e26c), finalized #0 (0x9b46…da08), ⬇ 0.8kiB/s ⬆ 0.9kiB/s    
+2021-12-29 14:06:06.011  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:06.166 and block number 2 from block importer.    
+2021-12-29 14:06:06.012 TRACE tokio-runtime-worker runtime: Batch-verification: 0 pending tasks, 0 sr25519 signatures    
+2021-12-29 14:06:06.012 TRACE tokio-runtime-worker runtime: Finalization of batch verification took 0 ms    
+2021-12-29 14:06:06.012  INFO tokio-runtime-worker substrate: ✨ Imported #2 (0x9327…adc1)    
+2021-12-29 14:06:06.653  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #2 (0x9327…adc1), finalized #0 (0x9b46…da08), ⬇ 0.8kiB/s ⬆ 0.7kiB/s    
+2021-12-29 14:06:11.653  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #2 (0x9327…adc1), finalized #0 (0x9b46…da08), ⬇ 0.5kiB/s ⬆ 0.5kiB/s    
+2021-12-29 14:06:12.000  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🙌 Starting consensus session on top of parent 0x9327b0aa997b6a209fb847f7969930bdc16ffcb69d31f2d3d588da8c5ed4adc1    
+2021-12-29 14:06:12.002  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🎁 Prepared block for proposing at 3 (0 ms) [hash: 0x4241279d215600689562ed09461a0fe5766e0884a9bc47167cfe28921a28a5fc; parent_hash: 0x9327…adc1; extrinsics (1): [0x2549…a97c]]    
+2021-12-29 14:06:12.007  INFO tokio-runtime-worker aura: 🔖 Pre-sealed block for proposal at 3. Hash now 0x6828df65e0939b45c419feb522431bb7f88c31277c0b50acee2f952a2ec2017a, previously 0x4241279d215600689562ed09461a0fe5766e0884a9bc47167cfe28921a28a5fc.    
+2021-12-29 14:06:12.007  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:12.172 and block number 3 from block importer.    
+2021-12-29 14:06:12.007  INFO tokio-runtime-worker substrate: ✨ Imported #3 (0x6828…017a)    
+2021-12-29 14:06:16.654  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #3 (0x6828…017a), finalized #1 (0x55e8…e26c), ⬇ 0.8kiB/s ⬆ 0.8kiB/s    
+2021-12-29 14:06:18.010  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:18.178 and block number 4 from block importer.    
+2021-12-29 14:06:18.010  INFO tokio-runtime-worker node_template::casino: 🎰 Timestamp of block 8th to arrive: 2021-12-29 13:06:42.202 UTC    
+2021-12-29 14:06:18.010  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp via gossip engine 2021-12-29 13:06:42.202 UTC    
+2021-12-29 14:06:18.011 TRACE tokio-runtime-worker runtime: Batch-verification: 0 pending tasks, 0 sr25519 signatures    
+2021-12-29 14:06:18.011 TRACE tokio-runtime-worker runtime: Finalization of batch verification took 0 ms    
+2021-12-29 14:06:18.011  INFO tokio-runtime-worker substrate: ✨ Imported #4 (0xeded…6d96)    
+2021-12-29 14:06:18.387  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp via gossip engine 2021-12-29 13:06:42.202 UTC    
+2021-12-29 14:06:18.388  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp via gossip engine 2021-12-29 13:06:42.202 UTC    
+2021-12-29 14:06:21.654  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #4 (0xeded…6d96), finalized #2 (0x9327…adc1), ⬇ 0.7kiB/s ⬆ 0.6kiB/s    
+2021-12-29 14:06:24.001  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🙌 Starting consensus session on top of parent 0xeded96db1720f404a05d8ab2f9b4fc7e48261cb68f82e454b4e3b2e68b046d96    
+2021-12-29 14:06:24.003  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🎁 Prepared block for proposing at 5 (0 ms) [hash: 0x0bec398e3c3786a4b9de81bb127a016cfe402de9422bed10362d8fbef026a5b5; parent_hash: 0xeded…6d96; extrinsics (1): [0xb05c…9802]]    
+2021-12-29 14:06:24.008  INFO tokio-runtime-worker aura: 🔖 Pre-sealed block for proposal at 5. Hash now 0x2b9b61d8a22230c6ca7f6adf071c0529fdc192c794b2ac764fb167afcb6195fb, previously 0x0bec398e3c3786a4b9de81bb127a016cfe402de9422bed10362d8fbef026a5b5.    
+2021-12-29 14:06:24.008  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:24.184 and block number 5 from block importer.    
+2021-12-29 14:06:24.009  INFO tokio-runtime-worker substrate: ✨ Imported #5 (0x2b9b…95fb)    
+2021-12-29 14:06:26.654  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #5 (0x2b9b…95fb), finalized #3 (0x6828…017a), ⬇ 0.7kiB/s ⬆ 0.8kiB/s    
+2021-12-29 14:06:30.007  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:30.190 and block number 6 from block importer.    
+2021-12-29 14:06:30.007 TRACE tokio-runtime-worker runtime: Batch-verification: 0 pending tasks, 0 sr25519 signatures    
+2021-12-29 14:06:30.007 TRACE tokio-runtime-worker runtime: Finalization of batch verification took 0 ms    
+2021-12-29 14:06:30.007  INFO tokio-runtime-worker substrate: ✨ Imported #6 (0xe767…af52)    
+2021-12-29 14:06:31.654  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #6 (0xe767…af52), finalized #4 (0xeded…6d96), ⬇ 0.8kiB/s ⬆ 0.7kiB/s    
+2021-12-29 14:06:36.000  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🙌 Starting consensus session on top of parent 0xe767ea2eeb989c19413642a3794199085ffcd0564a4775240e78e53be50eaf52    
+2021-12-29 14:06:36.002  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🎁 Prepared block for proposing at 7 (0 ms) [hash: 0x6b2228f0cb215d8c48fe695a3914eee81b42915d4f735b65f3c6a16df03411a8; parent_hash: 0xe767…af52; extrinsics (1): [0x8a52…be33]]    
+2021-12-29 14:06:36.007  INFO tokio-runtime-worker aura: 🔖 Pre-sealed block for proposal at 7. Hash now 0xd66bf1b38947257666cf7f0d2a4353737a4b5428121c6b5aa3e9d43863ddf2cc, previously 0x6b2228f0cb215d8c48fe695a3914eee81b42915d4f735b65f3c6a16df03411a8.    
+2021-12-29 14:06:36.007  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:36.196 and block number 7 from block importer.    
+2021-12-29 14:06:36.008  INFO tokio-runtime-worker substrate: ✨ Imported #7 (0xd66b…f2cc)    
+2021-12-29 14:06:36.655  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #7 (0xd66b…f2cc), finalized #4 (0xeded…6d96), ⬇ 0.6kiB/s ⬆ 0.7kiB/s    
+2021-12-29 14:06:41.655  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #7 (0xd66b…f2cc), finalized #5 (0x2b9b…95fb), ⬇ 0.6kiB/s ⬆ 0.5kiB/s    
+2021-12-29 14:06:42.004  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:42.202 and block number 8 from block importer.    
+2021-12-29 14:06:42.004 TRACE tokio-runtime-worker runtime: Batch-verification: 0 pending tasks, 0 sr25519 signatures    
+2021-12-29 14:06:42.004 TRACE tokio-runtime-worker runtime: Finalization of batch verification took 0 ms    
+2021-12-29 14:06:42.004  INFO tokio-runtime-worker substrate: ✨ Imported #8 (0xf719…be53)    
+2021-12-29 14:06:46.656  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #8 (0xf719…be53), finalized #6 (0xe767…af52), ⬇ 0.8kiB/s ⬆ 0.7kiB/s    
+2021-12-29 14:06:48.001  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🙌 Starting consensus session on top of parent 0xf719d6bb26883d9eef7b2dab0191b983e3281c350ed67f337ac0a0077782be53    
+2021-12-29 14:06:48.003  INFO tokio-runtime-worker sc_basic_authorship::basic_authorship: 🎁 Prepared block for proposing at 9 (0 ms) [hash: 0xea8edc5f39088a76b8172ba7e82a4be3a59a5579d9ecd6b41a91f01f642570a9; parent_hash: 0xf719…be53; extrinsics (1): [0xa607…d6eb]]    
+2021-12-29 14:06:48.008  INFO tokio-runtime-worker aura: 🔖 Pre-sealed block for proposal at 9. Hash now 0xee4d29155252d6c86ce6054e438f83b505730dc393cfdb8259fdf521ff432426, previously 0xea8edc5f39088a76b8172ba7e82a4be3a59a5579d9ecd6b41a91f01f642570a9.    
+2021-12-29 14:06:48.008  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:48.208 and block number 9 from block importer.    
+2021-12-29 14:06:48.008  INFO tokio-runtime-worker substrate: ✨ Imported #9 (0xee4d…2426)    
+2021-12-29 14:06:51.656  INFO tokio-runtime-worker substrate: 💤 Idle (1 peers), best: #9 (0xee4d…2426), finalized #7 (0xd66b…f2cc), ⬇ 0.6kiB/s ⬆ 0.7kiB/s    
+2021-12-29 14:06:54.005  INFO tokio-runtime-worker node_template::casino: 🎰 Received timestamp 2021-12-29 13:06:54.214 and block number 10 from block importer.    
+2021-12-29 14:06:54.006 TRACE tokio-runtime-worker runtime: Batch-verification: 0 pending tasks, 0 sr25519 signatures    
+2021-12-29 14:06:54.006 TRACE tokio-runtime-worker runtime: Finalization of batch verification took 0 ms    
+2021-12-29 14:06:54.006  INFO tokio-runtime-worker substrate: ✨ Imported #10 (0x7e64…7e55)    
+2021-12-29 14:06:54.691 ERROR tokio-runtime-worker sub-libp2p: remove_set_reserved_peer with unknown protocol: casino/1    
+

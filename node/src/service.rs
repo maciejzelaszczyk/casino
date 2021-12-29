@@ -59,7 +59,7 @@ pub fn new_partial(
 			>,
 			sc_finality_grandpa::LinkHalf<Block, FullClient, FullSelectChain>,
 			Option<Telemetry>,
-			TracingUnboundedReceiver<sp_timestamp::Timestamp>,
+			TracingUnboundedReceiver<casino::TypeSentFromBlockImporter<Block>>,
 		),
 	>,
 	ServiceError,
@@ -116,7 +116,7 @@ pub fn new_partial(
 	)?;
 
 	let (tx, rx) = sc_utils::mpsc::tracing_unbounded("casino-timestamp-channel");
-	let casino_block_importer = casino::CasinoBlockImporter::<Block, _, _>::new(grandpa_block_import.clone(), 1, 5, tx);
+	let casino_block_importer = casino::CasinoBlockImporter::<Block, _, _>::new(grandpa_block_import.clone(), tx);
 
 	let slot_duration = sc_consensus_aura::slot_duration(&*client)?.slot_duration();
 
