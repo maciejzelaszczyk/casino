@@ -114,24 +114,20 @@ impl<Block: BlockT> CassinoGossipEngine<Block> {
             self.gossip_engine.lock().unwrap().gossip_message(topic_hash::<Block>(CASINO_TOPIC), Vec::from(predicted_timesamp.to_be_bytes()), false);
         }
     }
-
-    fn check_send_timestamp_gossip(&mut self, timestamp_and_block_number: TypeSentFromBlockImporter<Block>) {
-        let (timestamp, block_number) = timestamp_and_block_number;
-        log::info!("🎰 Received timestamp {} and block number {} from block importer.", u64_timestamp_to_string(*timestamp), &block_number);
-        let block_number_threshold = sp_runtime::traits::NumberFor::<Block>::from(self.gossip_block_number_threshold as u32);
+    fn gossip(&mut self, received_timestamp: (Timestamp, NumberFor<Block>)) {
+        let (timestamp, block_number) = received_timestamp;
+        let timestamp: u64 = timestamp.into();
+        println!("Current timestamp: {} | Block number: {}", u64_timestamp_to_string(timestamp), block_number);
+        let block_number_threshold = NumberFor::<Block>::from(self.block_number_threshold as u32);
+        self.first_timestamps.entry(block_number).or_insert(timestamp);
         if block_number.eq(&block_number_threshold) {
-            log::debug!("🎰 Saving previous block timestamp {} UTC", u64_timestamp_to_string(*timestamp));
-            self.previous_block_timestamp = *timestamp;
-        } else if self.previous_block_timestamp != 0 {
-            let diff = *timestamp - self.previous_block_timestamp;
-            let predicted_timestamp = self.previous_block_timestamp + self.gossip_next_block_number * diff;
-            log::info!("🎰 Timestamp of block {}th to arrive: {} UTC", self.gossip_block_number_threshold + self.gossip_next_block_number, u64_timestamp_to_string(predicted_timestamp));
-            log::debug!("🎰 Diff between previous block: {}", u64_timestamp_to_string(diff));
-            self.gossip_engine.lock().unwrap().gossip_message(
-                casino_topic::<Block>(),
-                Vec::from(predicted_timestamp.to_be_bytes()),
-                false);
-            self.previous_block_timestamp = 0;
+            let mut timestamps = self.first_timestamps.values().cloned().collect::<Vec<_>>();
+            timestamps.sort();
+            let diffs = timestamps.windows(2).map(|w| w[1] - w[0]);
+            let mean_diff: u64 = diffs.sum::<u64>() / ((timestamps.len() - 1) as u64);
+            let predicted_timesamp = timestamp + self.prediction_window as u64 * mean_diff;
+            println!("Gossiping | Timestamp prediction: {}", u64_timestamp_to_string(predicted_timesamp));
+            self.gossip_engine.lock().unwrap().gossip_message(topic_hash::<Block>(CASINO_TOPIC), Vec::from(predicted_timesamp.to_be_bytes()), false);
         }
     }
 }

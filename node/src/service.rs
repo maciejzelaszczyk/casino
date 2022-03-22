@@ -8,6 +8,8 @@ use sc_finality_grandpa::SharedVoterState;
 use sc_keystore::LocalKeystore;
 use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryWorker};
+use sp_timestamp::Timestamp;
+use sp_runtime::traits::NumberFor;
 use sp_consensus::SlotData;
 use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
 use std::{sync::Arc, time::Duration};
@@ -49,7 +51,7 @@ pub fn new_partial(
 		sc_consensus::DefaultImportQueue<Block, FullClient>,
 		sc_transaction_pool::FullPool<Block, FullClient>,
 		(
-			casino::CasinoBlockImporter<Block, FullClient,
+			casino::CasinoBlockImport<Block, FullClient,
 				sc_finality_grandpa::GrandpaBlockImport<
 					FullBackend,
 					Block,
@@ -59,7 +61,7 @@ pub fn new_partial(
 			>,
 			sc_finality_grandpa::LinkHalf<Block, FullClient, FullSelectChain>,
 			Option<Telemetry>,
-			TracingUnboundedReceiver<casino::TypeSentFromBlockImporter<Block>>,
+			TracingUnboundedReceiver<(Timestamp, NumberFor<Block>)>
 		),
 	>,
 	ServiceError,
@@ -116,7 +118,7 @@ pub fn new_partial(
 	)?;
 
 	let (tx, rx) = sc_utils::mpsc::tracing_unbounded("casino-timestamp-channel");
-	let casino_block_importer = casino::CasinoBlockImporter::<Block, _, _>::new(grandpa_block_import.clone(), tx);
+	let casino_block_importer = casino::CasinoBlockImport::<Block, _, _>::new(grandpa_block_import.clone(), tx);
 
 	let slot_duration = sc_consensus_aura::slot_duration(&*client)?.slot_duration();
 
